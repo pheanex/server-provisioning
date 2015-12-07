@@ -1,0 +1,9 @@
+---
+- name: run iptables script
+  command: /root/iptables.sh
+
+- name: restart docker
+  service: name=docker state=restarted
+
+- name: restart fail2ban
+  service: name=docker state=restarted

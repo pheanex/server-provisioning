@@ -1,0 +1,17 @@
+- hosts: webserver
+  roles:
+    - ssh
+    - hostname
+    - apt
+    - ssl
+    - postfix
+    - dovecot
+    - apache2
+    - zabbix_server
+    - ntp
+    - docker
+    - bind
+    - mc
+    - fail2ban
+    - users
+    - iptables

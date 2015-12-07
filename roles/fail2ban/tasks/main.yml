@@ -1,0 +1,18 @@
+---
+- name: install Fail2ban
+  apt: name=fail2ban state=latest update_cache=yes
+
+- name: install configuration files Fail2ban
+  template: src={{item.src}} dest=/etc/fail2ban/{{item.dest}} owner=root group=root mode=644
+  with_items:
+    - src: fail2ban.conf
+      dest: fail2ban.conf
+    - src: jail.conf
+      dest: jail.conf
+    - src: postfix.conf
+      dest: filter.d/postfix.conf
+  notify:
+    - restart fail2ban
+
+- name: start Fail2ban
+  service: name=fail2ban state=started

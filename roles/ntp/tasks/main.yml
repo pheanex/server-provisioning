@@ -1,0 +1,6 @@
+---
+- name: install NTP
+  apt: name=ntp state=latest update_cache=yes
+
+- name: start NTP
+  service: name=ntp state=started

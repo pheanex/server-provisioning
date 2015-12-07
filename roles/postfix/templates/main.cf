@@ -1,0 +1,132 @@
+# See /usr/share/postfix/main.cf.dist for a commented, more complete version
+
+# The text that follows the 220 status code in the SMTP greeting banner.
+# Some people like to see the mail version advertised.
+# By default, Postfix shows no version. 
+smtpd_banner = {{hostname}}.manna.uno
+mydomain = manna.uno
+
+# Whether or not to use the local biff service.
+# This service sends "new mail" notifications to users
+# who have requested new mail notification with the UNIX command "biff y". 
+biff = no
+
+# appending .domain is the MUA's job.
+append_dot_mydomain = no
+
+# TLS parameters
+smtpd_tls_exclude_ciphers = aNULL, eNULL, EXPORT, DES, RC4, MD5, PSK, aECDH, EDH-DSS-DES-CBC3-SHA, EDH-RSA-DES-CDC3-SHA, KRB5-DE5, CBC3-SHA
+smtpd_tls_dh1024_param_file = /etc/ssl/dhparams2048.pem
+smtpd_tls_cert_file=/etc/ssl/private/manna.uno.cert.pem
+smtpd_tls_key_file=/etc/ssl/private/manna.uno.key.pem
+smtpd_use_tls=yes
+smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+
+# SASL
+smtpd_sasl_auth_enable = yes
+smtpd_sasl_type = dovecot
+smtpd_sasl_path = private/auth
+smtpd_sasl_authenticated_header = yes
+smtpd_sasl_security_options = noanonymous
+smtpd_tls_auth_only = yes
+
+# The alias databases that are used for local(8) delivery.
+# See aliases(5) for syntax details. Specify zero or more "type:name" lookup tables,
+# separated by whitespace or comma. Tables will be searched in
+# the specified order until a match is found. Note: these lookups are recursive. 
+alias_maps = hash:/etc/aliases
+alias_database = hash:/etc/aliases
+
+# The internet hostname of this mail system
+myhostname = {{hostname}}.manna.uno
+
+virtual_alias_domains = pheanex.de {{hostname}}.pheanex.de mail.pheanex.de manna.koeln {{hostname}}.manna.koeln mail.manna.koeln konstantin.manna.koeln
+virtual_mailbox_domains = manna.uno {{hostname}}.manna.uno mail.manna.uno
+virtual_uid_maps = static:1000
+virtual_gid_maps = static:1000
+virtual_mailbox_base = /home/pheanex/maildir/
+virtual_mailbox_maps = hash:/etc/postfix/virtual_mailbox_recipients
+virtual_alias_maps = hash:/etc/postfix/virtual_mailbox_aliases
+
+# The list of domains that are delivered via the $local_transport mail delivery transport.
+# By default this is the Postfix local(8) delivery agent which looks
+# up all recipients in /etc/passwd and /etc/aliases.
+mydestination = localhost, localhost.$mydomain
+
+# The list of "trusted" remote SMTP clients that have more privileges than "strangers"
+mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+
+# Optional external command that the local(8) delivery agent should use for mailbox delivery.
+# The command is run with the user ID and the primary group ID privileges of the recipient. 
+mailbox_command = procmail -a "$EXTENSION"
+
+# The maximal size of any local(8) individual mailbox or maildir file, or zero (no limit)
+mailbox_size_limit = 1000000000
+
+# The set of characters that can separate a user name from its extension (example: user+foo)
+recipient_delimiter = +
+
+# The network interface addresses that this mail system receives mail on
+inet_interfaces = all
+
+# An optional numerical network address that the Postfix SMTP client
+# should bind to when making an IPv4 connection
+smtp_bind_address = 37.120.160.218
+smtp_bind_address6 = 2a03:4000:0006:3150:0000:0000:0000:0001
+
+# Limit DOS
+default_process_limit = 100
+smtpd_client_connection_count_limit = 10
+smtpd_client_connection_rate_limit = 30
+queue_minfree = 20971520
+header_size_limit = 51200
+message_size_limit = 10485760
+smtpd_recipient_limit = 100
+
+# Wait until the RCPT TO command before evaluating $smtpd_client_restrictions,
+# $smtpd_helo_restrictions and $smtpd_sender_restrictions,
+# or wait until the ETRN command before evaluating
+# $smtpd_client_restrictions and $smtpd_helo_restrictions. 
+smtpd_delay_reject = yes
+
+# Require that a remote SMTP client introduces itself with the HELO or EHLO command
+# before sending the MAIL command or other commands that require EHLO negotiation
+smtpd_helo_required = yes
+
+# Do not let clients check if recipient exists
+disable_vrfy_command = yes
+
+# Punishing bad clients with silence
+smtpd_soft_error_limit = 10
+smtpd_hard_error_limit = 20
+smtpd_error_sleep_time = 1s
+
+# If a client uses more than <number> of NOOP,VERFY,ETRN,RSET commands without
+# sending a correct email, it is counted as an error
+smtpd_junk_command_limit = 50
+
+# Filter on HELO/EHLO
+smtpd_helo_restrictions =
+  permit_mynetworks
+  reject_invalid_helo_hostname
+  reject_unknown_helo_hostname
+  permit
+
+# Filter on MAIL FROM
+smtpd_sender_restrictions =
+  permit_mynetworks
+  reject_non_fqdn_sender
+  reject_unknown_sender_domain
+  permit
+
+# Filter on RCPT TO
+smtpd_recipient_restrictions =
+  reject_non_fqdn_recipient
+  reject_unknown_recipient_domain
+  reject_unauth_pipelining
+  permit_mynetworks
+  permit_sasl_authenticated
+  permit_auth_destination
+  reject_unauth_destination
+  permit

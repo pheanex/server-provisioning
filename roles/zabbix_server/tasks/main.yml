@@ -1,0 +1,31 @@
+---
+- name: Add zabbix.com repository key
+  apt_key: data="{{ lookup('file', 'zabbix-official-repo.key') }}" state=present
+  register: zabbix_server_apt_key
+
+- name: Add zabbix.com repository
+  apt_repository:
+    repo='deb http://repo.zabbix.com/zabbix/{{zabbix_server_major}}.{{zabbix_server_minor}}/{{ansible_distribution|lower}} {{ansible_lsb.codename}} main contrib non-free'
+    state=present
+  register: zabbix_server_apt_repo
+
+- name: Update apt after adding repository
+  apt: update_cache="yes"
+  when: zabbix_server_apt_key | changed or zabbix_server_apt_repo | changed
+
+- name: Install zabbix-server-mysql package
+  apt: pkg=zabbix-server-mysql state=present install_recommends=yes update_cache=yes
+
+- name: Install zabbix-frontend package
+  apt: pkg=zabbix-frontend-php state=latest update_cache=yes
+
+- name: get mysql password
+  shell: "awk -F= '/^DBPassword=/{print $2}' /etc/zabbix/zabbix_server.conf"
+  register: zabbix_mysql_password
+
+- name: zabbix frontend configuration
+  template: src=zabbix.conf.php.j2 dest=/etc/zabbix/web/zabbix.conf.php
+
+- name: php config
+  template: src=php.ini.j2 dest=/etc/php5/apache2/php.ini
+  notify: apache_restart

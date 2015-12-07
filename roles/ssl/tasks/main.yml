@@ -1,0 +1,16 @@
+---
+- name: install ssl-cert package
+  apt: name="ssl-cert" state=latest update_cache=yes
+
+- name: ensure /etc/ssl/private exists
+  file: path=/etc/ssl/private state=directory mode=0750 owner=root group="ssl-cert"
+
+- name: ensure SSL certificates present
+  template: src={{item.name}}.j2 dest=/etc/ssl/private/{{item.name}} mode=640 owner=root group="ssl-cert"
+  with_items:
+    - name: manna.uno.cert.pem
+    - name: manna.uno.key.pem
+    - name: manna.uno.key.pub
+    - name: manna.uno.key_cert.pem
+    - name: pheanex_cert.pem
+    - name: pheanex_key.pem

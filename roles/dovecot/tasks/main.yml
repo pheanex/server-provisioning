@@ -1,0 +1,55 @@
+---
+- name: install Dovecot
+  apt: name={{item}} state=latest update_cache=yes
+  with_items:
+    - "dovecot-core"
+    - "dovecot-imapd"
+
+- name: install Dovecot configuration files
+  template: src="{{item.src}}.j2" dest="/etc/dovecot/{{item.dest}}" owner="{{item.owner}}" group="{{item.group}}" mode="{{item.mode}}"
+  with_items:
+    - src: "users"
+      mode: "440"
+      owner: "dovecot"
+      group: "dovecot"
+      dest: "users"
+    - src: "dovecot.conf"
+      mode: "640"
+      owner: "root"
+      group: "dovecot"
+      dest: "dovecot.conf"
+    - src: "10-auth.conf"
+      mode: "640"
+      owner: "root"
+      group: "dovecot"
+      dest: "conf.d/10-auth.conf"
+    - src: "10-logging.conf"
+      mode: "640"
+      owner: "root"
+      group: "dovecot"
+      dest: "conf.d/10-logging.conf"
+    - src: "10-mail.conf"
+      mode: "640"
+      owner: "root"
+      group: "dovecot"
+      dest: "conf.d/10-mail.conf"
+    - src: "10-master.conf"
+      mode: "640"
+      owner: "root"
+      group: "dovecot"
+      dest: "conf.d/10-master.conf"
+    - src: "10-ssl.conf"
+      mode: "640"
+      owner: "root"
+      group: "dovecot"
+      dest: "conf.d/10-ssl.conf"
+    - src: "auth-passwdfile.conf.ext"
+      mode: "640"
+      owner: "root"
+      group: "dovecot"
+      dest: "conf.d/auth-passwdfile.conf.ext"
+  notify:
+    - restart dovecot
+
+- name: start Dovecot
+  service: name=dovecot state=started

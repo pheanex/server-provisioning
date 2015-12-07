@@ -1,0 +1,17 @@
+disable_plaintext_auth = no
+mail_privileged_group = mail
+
+protocols = "imap"
+
+protocol imap {
+  mail_plugins = " autocreate"
+}
+
+plugin {
+  autocreate = Trash
+  autocreate2 = Sent
+  autosubscribe = Trash
+  autosubscribe2 = Sent
+}
+
+!include conf.d/*.conf

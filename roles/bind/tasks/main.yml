@@ -1,0 +1,62 @@
+---
+- name: install Bind DNS-Server
+  apt: name=bind9 state=latest update_cache=yes
+
+- name: install Bind DNS-Utils
+  apt: name=bind9utils state=installed update_cache=yes
+
+- name: remove default files
+  file: path=/etc/bind/{{item.path}} state=absent
+  with_items:
+    - path: bind.keys
+    - path: db.0
+    - path: db.127
+    - path: db.255
+    - path: db.empty
+    - path: db.local
+    - path: db.root
+    - path: named.conf.default-zones
+    - path: named.conf.local
+    - path: named.conf.options
+    - path: zones.rfc1918
+
+- name: install configuration files Bind
+  template: src={{item.src}} dest={{item.dest}} owner={{item.owner}} group={{item.group}} mode=640
+  with_items:
+    - src: named.conf
+      dest: /etc/bind/named.conf
+      owner: root
+      group: bind
+    - src: rndc.key.j2
+      dest: /etc/bind/rndc.key
+      owner: bind
+      group: bind
+    - src: manna.koeln
+      dest: /var/lib/bind/manna.koeln
+      owner: bind
+      group: bind
+    - src: manna.koeln.signed
+      dest: /var/lib/bind/manna.koeln.signed
+      owner: bind
+      group: bind
+    - src: manna.uno
+      dest: /var/lib/bind/manna.uno
+      owner: bind
+      group: bind
+    - src: manna.uno.signed
+      dest: /var/lib/bind/manna.uno.signed
+      owner: bind
+      group: bind
+    - src: pheanex.de
+      dest: /var/lib/bind/pheanex.de
+      owner: bind
+      group: bind
+    - src: pheanex.de.signed
+      dest: /var/lib/bind/pheanex.de.signed
+      owner: bind
+      group: bind
+  notify:
+    - restart bind
+
+- name: start Bind9
+  service: name=bind9 state=started

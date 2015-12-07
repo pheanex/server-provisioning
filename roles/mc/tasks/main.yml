@@ -1,0 +1,3 @@
+---
+- name: install MidnightCommander
+  apt: name=mc state=latest update_cache=yes

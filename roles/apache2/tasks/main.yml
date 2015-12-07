@@ -1,0 +1,10 @@
+---
+- name: install apache2
+  apt: name=apache2 state=latest update_cache=yes
+
+- name: enable ssl mod
+  apache2_module: name=ssl state=present
+
+- name: set default page + redirect http to https
+  template: src="000-default.conf.j2" dest="/etc/apache2/sites-available/000-default.conf"
+  notify: restart_apache2

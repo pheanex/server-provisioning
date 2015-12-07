@@ -1,0 +1,47 @@
+$TTL 86400;
+$ORIGIN manna.koeln.
+
+@               IN      SOA     ns hostmaster ( 2015120702 43200 5400 604800 10800 )
+                IN      DNSKEY  257 3 7 AwEAAcdK9oqpTblGbU00ivu+dxYVMugfah0S4XPg09AAZREIhH4swjUF cIWGPJMEC//Tsz5sDltSK+7QtscRVOSXDDcacFPijPDcNSFR3uCGbEjh uLMFxlNfA0tUsPmDnPvoFdlIZQvJKrUKiJsZTfZFbvzyiJpW5njhQ0lP USTwAgJB/9Tx2NbzTU/egJ/1CcWIYuZdVPmdUIeLfm/oUiZKcdlX5GBC NRzYZuxodKV4qqi1R3Zecqd5TOCadR3xNzxloFeYZWmnFlK0rsuCpE8j Kwea2BAl3U1nsj5NxNaVMj8PTacE3oKYZmbBNMqSOJ0R8A54KdRZlj7W vMSWgFgoUmDplGJNWi38JE9s1KTV/0Ybj/uMcnNxRnra/EMztXjBTZNY WXJnN+0A/XO2WIiViZZqz2m3SceVQB6ZrAT5a/t9EIVPrIYCmOhTjCqK 4+L6c0WIepSOX+28cLDw+9tU95HzTMV5A2hQtGnkTZOTX44ANZlT5kqK swHAmo7vo5x7a4eQwuHw5CEjIFyR5GW1KqPY4qTrMIN22SIRCAvtfiwu tCjiL0L/XBVG1sGe/RchyaxUTytueYwLu9JtT+3oqf9i5nhJYsujYhUn hdaTJzA1XhT8RaAulVsEEwVJmT+SCjUWWnn3GZPlKke69OQJC9K7XhrH KoPDBDOWpK//Ygp3
+                IN      DNSKEY  256 3 7 AwEAAb1oXsYHflDyzSY657HfnMntz6G0U6dTXTlSqVTzbVkjCti2XQsv StpkjN8nVsIJo0b0Wc6TyIQeVZQ1MXCUZdLGDa8ZR/8+REaGwFKXumQ1 jVtNvsmQyX0+Gc3lUxXsJoxgeplh+iujbd16Uf3Gm7RyZGall5VpsI3o 3w8AumBmSrZhLuuMrPcfH0nXzIDixMaMzkGk0qm9nojY0Uc7D/8wIgXQ y1je8WWYqgnAUjV3YyRIkPnocECGUSBXYM7SHjOsh4srBg002PHGosCt IYZyVVIhaykyrwAvZ9Ey7i6wVmnqwae+97/0T8RWAJkv6qBZ56O7rTVc IpkeSBxhlek=
+                IN      NS      ns.pheanex.de.
+                IN      NS      ns2.nonymus.de.
+                IN      MX      10 mail
+                IN      MX      20 mail
+                IN      A       37.120.160.218
+                IN      AAAA    2a03:4000:6:3150::1
+                IN      SSHFP   1 1 2479AA44B9F4D8C08C340609F3DAA495584485AF
+                IN      SSHFP   2 1 4DF9856C2FCE409F23D4292A32F53CA0AA650F1F
+ns              IN      A       37.120.160.218
+                IN      AAAA    2a03:4000:6:3150::1
+                IN      MX      10 mail
+                IN      MX      20 mail
+                IN      SSHFP   1 1 2479AA44B9F4D8C08C340609F3DAA495584485AF
+                IN      SSHFP   2 1 4DF9856C2FCE409F23D4292A32F53CA0AA650F1F
+nardin          IN      CNAME   rodin
+rodin           IN      A       37.120.160.218
+                IN      AAAA    2a03:4000:6:3150::1
+                IN      MX      10 mail
+                IN      MX      20 mail
+                IN      SSHFP   1 1 2479AA44B9F4D8C08C340609F3DAA495584485AF
+                IN      SSHFP   2 1 4DF9856C2FCE409F23D4292A32F53CA0AA650F1F
+konstantin      IN      A       37.120.160.218
+                IN      AAAA    2a03:4000:6:3150::1
+                IN      MX      10 mail
+                IN      MX      20 mail
+                IN      SSHFP   1 1 2479AA44B9F4D8C08C340609F3DAA495584485AF
+                IN      SSHFP   2 1 4DF9856C2FCE409F23D4292A32F53CA0AA650F1F
+mail            IN      A       37.120.160.218
+                IN      AAAA    2a03:4000:6:3150::1
+                IN      MX      10 mail
+                IN      MX      20 mail
+                IN      SSHFP   1 1 2479AA44B9F4D8C08C340609F3DAA495584485AF
+                IN      SSHFP   2 1 4DF9856C2FCE409F23D4292A32F53CA0AA650F1F
+rodin4          IN      A       37.120.160.218
+                IN      SSHFP   1 1 2479AA44B9F4D8C08C340609F3DAA495584485AF
+                IN      SSHFP   2 1 4DF9856C2FCE409F23D4292A32F53CA0AA650F1F
+rodin6          IN      AAAA    2a03:4000:6:3150::1
+                IN      SSHFP   1 1 2479AA44B9F4D8C08C340609F3DAA495584485AF
+                IN      SSHFP   2 1 4DF9856C2FCE409F23D4292A32F53CA0AA650F1F
+nardin4         IN      CNAME   rodin4
+nardin6         IN      CNAME   rodin6

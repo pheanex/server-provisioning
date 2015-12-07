@@ -1,0 +1,9 @@
+---
+- name: restart postfix
+  service: name=postfix state=restarted
+
+- name: update virtual_mailbox_aliases postmap
+  shell: cd /etc/postfix; postmap hash:virtual_mailbox_aliases
+
+- name: update virtual_mailbox_recipients postmap
+  shell: cd /etc/postfix; postmap hash:virtual_mailbox_recipients

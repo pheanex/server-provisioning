@@ -1,0 +1,26 @@
+---
+- name: install OpenSSH-Server
+  apt: name=openssh-server state=latest update_cache=yes
+
+- name: install keys OpenSSH-Server
+  template: src={{item.name}} dest=/etc/ssh/{{item.name}} owner=root group=root mode={{item.mode}}
+  with_items:
+    - name: ssh_host_dsa_key
+      mode: "600"
+    - name: ssh_host_dsa_key.pub
+      mode: "644"
+    - name: ssh_host_ecdsa_key
+      mode: "600"
+    - name: ssh_host_ecdsa_key.pub
+      mode: "644"
+    - name: ssh_host_rsa_key
+      mode: "600"
+    - name: ssh_host_rsa_key.pub
+      mode: "644"
+    - name: sshd_config
+      mode: "644"
+  notify:
+    - restart openssh-server
+
+- name: start openssh-server
+  service: name=ssh state=started

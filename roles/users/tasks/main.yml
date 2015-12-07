@@ -1,0 +1,74 @@
+---
+- name: include vault vars
+  include_vars: vault_vars.yml
+
+- name: install users
+  user: name={{item.name}} state=present shell=/bin/bash createhome=yes password={{item.password}}
+  with_items:
+    - name: pheanex
+      password: "{{pheanex_pw}}"
+    - name: root
+      password: "{{root_pw}}"
+
+- name: known_hosts fingerprints
+  lineinfile: dest="/home/pheanex/.ssh/known_hosts" state=present create=yes line="{{vetinari_ssh_fingerprint}}"
+
+- name: create directories
+  file: owner="{{item.username|default('pheanex')}}" group="{{item.username|default('pheanex')}}" path="{{item.path}}" mode="{{item.mode|default(0700)}}" state={{item.state|default('directory')}}
+  with_items:
+    - username: root
+      path: "/root/.ssh"
+    - path: "/home/pheanex/.ssh"
+    - path: "/home/pheanex/bin"
+    - path: "/home/pheanex/Backup"
+    - path: "/home/pheanex/Backup/Bilder"
+    - path: "/home/pheanex/Backup/Dokumente"
+    - path: "/home/pheanex/Backup/Studium"
+    - path: "/home/pheanex/maildir"
+    - path: "/home/pheanex/.ssh/known_hosts"
+      mode: "0600"
+      state: file
+
+- name: authorized_keys, known_hosts, .bashrc and bin files
+  template: src="{{item.src}}" dest="{{item.dest}}" owner="{{item.username|default('pheanex')}}" group="{{item.username|default('pheanex')}}" mode="{{item.mode|default("0700")}}"
+  with_items:
+    - username: "root"
+      src: ".bashrc_root.j2"
+      dest: "/root/.bashrc"
+    - username: "root"
+      src: "authorized_keys_pheanex.j2"
+      dest: "/root/.ssh/authorized_keys"
+    - src: "authorized_keys_pheanex.j2"
+      dest: "/home/pheanex/.ssh/authorized_keys"
+    - src: ".bashrc_pheanex.j2"
+      dest: "/home/pheanex/.bashrc"
+    - src: "mount_vetinari_backup.sh"
+      dest: "/home/pheanex/bin/mount_vetinari_backup.sh"
+    - src: "umount_vetinari_backup.sh"
+      dest: "/home/pheanex/bin/umount_vetinari_backup.sh"
+    - src: "run_vetinari_backup.sh"
+      dest: "/home/pheanex/bin/run_vetinari_backup.sh"
+    - src: "vetinari.mount-options.j2"
+      dest: "/home/pheanex/vetinari.mount-options"
+      mode: "0600"
+    - src: "julian_pheanex_backup_key.j2"
+      dest: "/home/pheanex/.ssh/julian_pheanex_backup_key"
+      mode: "0600"
+
+- name: install cron maildirbackup
+  cron: name="Backup to Vetinari" minute="0" hour="2" state=present user=pheanex job="/home/pheanex/bin/run_vetinari_backup.sh"
+
+#- name: run backup
+#  command: su -c /home/pheanex/bin/run_vetinari_backup.sh pheanex
+
+- name: set git user name
+  shell: su -c "cd; git config --global user.email {{item}}" "{{item}}"
+  with_items:
+    - "pheanex"
+    - "root"
+
+- name: set git user email
+  shell: su -c "cd; git config --global user.name {{item}}@pheanex.de" "{{item}}"
+  with_items:
+    - "pheanex"
+    - "root"

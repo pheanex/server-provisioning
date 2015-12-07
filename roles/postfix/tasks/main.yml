@@ -1,0 +1,20 @@
+---
+- name: install Postfix
+  apt: name=postfix state=latest update_cache=yes
+
+- name: configuration files Postfix
+  template: src={{item.src}} dest=/etc/postfix/{{item.src}} owner=root group=root mode=644
+  with_items:
+    - src: bogus_mx
+    - src: helo_checks
+    - src: main.cf
+    - src: master.cf
+    - src: virtual_mailbox_aliases
+    - src: virtual_mailbox_recipients
+  notify:
+    - restart postfix
+    - update virtual_mailbox_aliases postmap
+    - update virtual_mailbox_recipients postmap
+
+- name: start Postfix
+  service: name=postfix state=started

@@ -1,0 +1,24 @@
+<VirtualHost *:80>
+        ServerName pheanex.de
+        Redirect permanent / https://pheanex.de/
+</VirtualHost>
+
+<VirtualHost *:443>
+        ServerName pheanex.de
+        ServerAdmin webmaster@pheanex.de
+
+        DocumentRoot /var/www/html
+        <Directory />
+                Options FollowSymLinks
+                AllowOverride None
+        </Directory>
+
+        SSLEngine on
+        SSLCertificateFile      /etc/ssl/private/manna.uno.cert.pem
+        SSLCertificateKeyFile   /etc/ssl/private/manna.uno.key.pem
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        LogLevel warn
+
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>

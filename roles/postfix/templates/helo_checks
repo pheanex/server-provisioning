@@ -1,0 +1,5 @@
+/^manna\.uno$/ 		550 Don't use my hostname
+/^mail\.manna\.uno$/ 	550 Don't use my hostname
+/^pheanex\.de$/ 	550 Don't use my hostname
+/^mail\.pheanex\.de$/ 	550 Don't use my hostname
+
