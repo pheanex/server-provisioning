@@ -20,6 +20,30 @@
     - path: named.conf.options
     - path: zones.rfc1918
 
+- name: create bind keys dir
+  file: path="/etc/bind/keys" state=directory owner=root group=bind mode=0750
+
+- name: install ZSK and KSK keys for inline signing
+  template: src={{item}} dest=/etc/bind/keys/{{item}} owner=root group=bind mode=640
+  with_items:
+    - "dsset-manna.koeln."
+    - "dsset-manna.uno."
+    - "dsset-pheanex.de."
+    - "Kmanna.koeln.+007+15992.key"
+    - "Kmanna.koeln.+007+15992.private"
+    - "Kmanna.koeln.+007+18144.key"
+    - "Kmanna.koeln.+007+18144.private"
+    - "Kmanna.uno.+007+14043.key"
+    - "Kmanna.uno.+007+14043.private"
+    - "Kmanna.uno.+007+49982.key"
+    - "Kmanna.uno.+007+49982.private"
+    - "Kpheanex.de.+007+02631.key"
+    - "Kpheanex.de.+007+02631.private"
+    - "Kpheanex.de.+007+50303.key"
+    - "Kpheanex.de.+007+50303.private"
+  notify:
+    - restart bind
+
 - name: install configuration files Bind
   template: src={{item.src}} dest={{item.dest}} owner={{item.owner}} group={{item.group}} mode=640
   with_items:
@@ -35,24 +59,12 @@
       dest: /var/lib/bind/manna.koeln
       owner: bind
       group: bind
-    - src: manna.koeln.signed
-      dest: /var/lib/bind/manna.koeln.signed
-      owner: bind
-      group: bind
     - src: manna.uno
       dest: /var/lib/bind/manna.uno
       owner: bind
       group: bind
-    - src: manna.uno.signed
-      dest: /var/lib/bind/manna.uno.signed
-      owner: bind
-      group: bind
     - src: pheanex.de
       dest: /var/lib/bind/pheanex.de
-      owner: bind
-      group: bind
-    - src: pheanex.de.signed
-      dest: /var/lib/bind/pheanex.de.signed
       owner: bind
       group: bind
   notify:
