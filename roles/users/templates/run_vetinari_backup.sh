@@ -8,6 +8,6 @@ done &&
 cd "${HOME}/maildir" &&
 git add -A . &&
 git commit -m "update from $(date)" &&
-rsync -crlpEADPXv "${HOME}/maildir/" "${HOME}/backup_decrypted/"
+rsync -crlpEADPX "${HOME}/maildir/" "${HOME}/backup_decrypted/"
 
 /home/pheanex/bin/umount_vetinari_backup.sh
