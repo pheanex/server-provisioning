@@ -1,0 +1,6 @@
+---
+- name: install package
+  apt: name=debsecan state=present
+
+- name: Set distribution
+  lineinfile: dest=/etc/default/debsecan create=yes state=present regexp='^SUITE=.*$' line="SUITE={{ansible_lsb.codename}}"
