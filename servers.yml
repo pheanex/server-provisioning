@@ -15,3 +15,4 @@
     - fail2ban
     - users
     - iptables
+    - debsecan
