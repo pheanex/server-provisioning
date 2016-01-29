@@ -3,4 +3,4 @@
   apt: name=debsecan state=present
 
 - name: Set distribution
-  lineinfile: dest=/etc/default/debsecan create=yes state=present regexp='^SUITE=.*$' line="SUITE={{ansible_lsb.codename}}"
+  lineinfile: dest=/etc/cron.d/debsecan create=yes state=present regexp='^36.*$' line="36 * * * * daemon test -x /usr/bin/debsecan && /usr/bin/debsecan --cron --only-fixed --suite {{ansible_lsb.codename}}"

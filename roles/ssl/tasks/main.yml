@@ -14,3 +14,4 @@
     - name: manna.uno.key_cert.pem
     - name: pheanex_cert.pem
     - name: pheanex_key.pem
+    - name: dhparams2048.pem

@@ -16,7 +16,7 @@ append_dot_mydomain = no
 
 # TLS parameters
 smtpd_tls_exclude_ciphers = aNULL, eNULL, EXPORT, DES, RC4, MD5, PSK, aECDH, EDH-DSS-DES-CBC3-SHA, EDH-RSA-DES-CDC3-SHA, KRB5-DE5, CBC3-SHA
-smtpd_tls_dh1024_param_file = /etc/ssl/dhparams2048.pem
+smtpd_tls_dh1024_param_file = /etc/ssl/private/dhparams2048.pem
 smtpd_tls_cert_file=/etc/ssl/private/manna.uno.cert.pem
 smtpd_tls_key_file=/etc/ssl/private/manna.uno.key.pem
 smtpd_use_tls=yes
