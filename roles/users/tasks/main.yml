@@ -9,6 +9,8 @@
       password: "{{pheanex_pw}}"
     - name: root
       password: "{{root_pw}}"
+    - name: raspberry
+      password: "{{raspberry_pw}}"
 
 - name: known_hosts fingerprints
   lineinfile: dest="/home/pheanex/.ssh/known_hosts" state=present create=yes line="{{vetinari_ssh_fingerprint}}"
@@ -28,6 +30,8 @@
     - path: "/home/pheanex/.ssh/known_hosts"
       mode: "0600"
       state: file
+    - username: raspberry
+      path: "/home/raspberry/.ssh"
 
 - name: authorized_keys, known_hosts, .bashrc and bin files
   template: src="{{item.src}}" dest="{{item.dest}}" owner="{{item.username|default('pheanex')}}" group="{{item.username|default('pheanex')}}" mode="{{item.mode|default("0700")}}"
@@ -54,6 +58,9 @@
     - src: "julian_pheanex_backup_key.j2"
       dest: "/home/pheanex/.ssh/julian_pheanex_backup_key"
       mode: "0600"
+    - username: "raspberry"
+      src: "authorized_keys_raspberry.j2"
+      dest: "/home/raspberry/.ssh/authorized_keys"
 
 - name: install cron maildirbackup
   cron: name="Backup to Vetinari" minute="0" hour="2" state=present user=pheanex job="/home/pheanex/bin/run_vetinari_backup.sh"
