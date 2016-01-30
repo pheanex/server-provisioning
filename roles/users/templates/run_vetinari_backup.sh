@@ -3,7 +3,7 @@
 /home/pheanex/bin/mount_vetinari_backup.sh &&
 for directory in Bilder Dokumente Studium
 do
-	rsync -crlpEADPXv "${HOME}/Backup/${directory}" "${HOME}/backup_decrypted/"
+	rsync -crlpEADPX "${HOME}/Backup/${directory}" "${HOME}/backup_decrypted/"
 done &&
 cd "${HOME}/maildir" &&
 git add -A . &&
