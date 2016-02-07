@@ -6,6 +6,7 @@
   apt: name="{{item}}" state=absent purge=yes
   with_items:
     - snmpd
+    - avahi-daemon
 
 - name: Autoremove unused packages
   command: apt-get -y autoremove

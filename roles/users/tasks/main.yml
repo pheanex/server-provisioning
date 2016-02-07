@@ -61,6 +61,10 @@
     - username: "raspberry"
       src: "authorized_keys_raspberry.j2"
       dest: "/home/raspberry/.ssh/authorized_keys"
+    - username: "raspberry"
+      src: "raspberry_private_key.j2"
+      dest: "/home/raspberry/.ssh/id_rsa"
+      mode: "0600"
 
 - name: install cron maildirbackup
   cron: name="Backup to Vetinari" minute="0" hour="2" state=present user=pheanex job="/home/pheanex/bin/run_vetinari_backup.sh"
