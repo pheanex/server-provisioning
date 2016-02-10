@@ -7,6 +7,10 @@
   with_items:
     - snmpd
     - avahi-daemon
+    - nfs-kernel-server
+    - nfs-common
+    - portmap
+    - rpcbind
 
 - name: Autoremove unused packages
   command: apt-get -y autoremove
