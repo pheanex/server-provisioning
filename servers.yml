@@ -6,8 +6,6 @@
     - ssl
     - postfix
     - dovecot
-    - apache2
-#    - zabbix_server
     - ntp
     - docker
     - bind
