@@ -68,6 +68,7 @@
       owner: bind
       group: bind
   notify:
+    - delete cache
     - restart bind
 
 - name: start Bind9
