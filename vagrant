@@ -1,5 +1,5 @@
 # Local Vagrant box
-vagrant ansible_ssh_host=127.0.0.1 ansible_ssh_user=vagrant ansible_ssh_port=2222 hostname=nardin
+vagrant ansible_ssh_host=127.0.0.1 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_ssh_port=2222 hostname=rodin sudo=yes
 
 [webserver]
 vagrant

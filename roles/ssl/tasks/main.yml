@@ -1,4 +1,6 @@
 ---
+- include_vars: vars/certs_keys.yml
+
 - name: install ssl-cert package
   apt: name="ssl-cert" state=latest update_cache=yes
 
@@ -8,10 +10,10 @@
 - name: ensure SSL certificates present
   template: src={{item.name}}.j2 dest=/etc/ssl/private/{{item.name}} mode=640 owner=root group="ssl-cert"
   with_items:
-    - name: manna.uno.cert.pem
+    - name: manna.uno.crt.pem
     - name: manna.uno.key.pem
-    - name: manna.uno.key.pub
-    - name: manna.uno.key_cert.pem
-    - name: pheanex_cert.pem
-    - name: pheanex_key.pem
+    - name: manna.koeln.crt.pem
+    - name: manna.koeln.key.pem
+    - name: pheanex.de.crt.pem
+    - name: pheanex.de.key.pem
     - name: dhparams2048.pem
