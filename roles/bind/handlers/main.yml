@@ -3,4 +3,4 @@
   service: name=bind9 state=restarted
 
 - name: delete cache
-  shell: rm /var/lib/bind/*{.jbk,.signed,.signed.jnl}
+  shell: /bin/bash -c "rm /var/lib/bind/*{.jbk,.signed,.signed.jnl}"
