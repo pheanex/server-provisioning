@@ -37,17 +37,10 @@ ansible-vault encrypt --vault-password-file ~/.ansible-vault-pw "$vars_file"
 
 # Remind user to update TLSA records (DANE) in bind zone-files
 echo
-echo "Update the following lines in the bind zone-files" >&2
+echo "Update the hases in the bind zone-files" >&2
 for domain in "manna.koeln" "manna.uno" "pheanex.de"
 do
-	echo "In the ${domain}-zone:"
-	for port in 25 443 993
-	do
-		for subdomain in ns nardin rodin www mail rodin4 nardin4 rodin6 nardin6
-		do
-			echo "_${port}._tcp.${subdomain}" IN TLSA 3 0 2 "$(cat "${domain}.crt.hash")"
-		done
-	done
+	echo "In the ${domain}-zone: $(cat "${domain}.crt.hash")"
 done
 
 # Cleanup hashes
