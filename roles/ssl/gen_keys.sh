@@ -7,7 +7,7 @@ vars_file="vars/certs_keys.yml"
 for domain in "manna.koeln" "manna.uno" "pheanex.de"
 do
 	# Generate Keys and certs
-	openssl req -x509 -nodes -new -keyout "${domain}.key.pem" -out "${domain}.crt.pem" -config "${domain}.openssl.cnf"
+	openssl req -x509 -nodes -new -keyout "${domain}.key.pem" -out "${domain}.crt.pem" -config "${domain}.openssl.cnf" -days 730
 
 	# Generate templates
 	echo -n "{{${domain//./_}_crt_pem}}" > "templates/${domain}.crt.pem.j2"
