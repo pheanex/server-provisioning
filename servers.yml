@@ -3,7 +3,9 @@
   roles:
     - ssh
     - hostname
-    - apt
+    - role: apt
+      tags:
+        - "apt"
     - ssl
     - postfix
     - dovecot
