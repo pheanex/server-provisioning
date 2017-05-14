@@ -1,0 +1,9 @@
+---
+- name: install send-logs cronjob
+  copy:
+    src: send-logs
+    dest: /etc/cron.daily/send-logs
+    owner: root
+    group: root
+    mode: 0755
+

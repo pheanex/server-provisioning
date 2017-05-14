@@ -17,3 +17,4 @@
     - users
     - iptables
     - debsecan
+    - send-logs
