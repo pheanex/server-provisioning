@@ -35,12 +35,12 @@ $IP6TABLES -P FORWARD ACCEPT
 echo "[+] Setting up INPUT chain..."
 #IPv4
 #Allow establish connections and related
-$IPTABLES -A INPUT -m conntrack --ctstate INVALID -j LOG --log-prefix "iptables: DROP INVALID "
+$IPTABLES -A INPUT -m conntrack --ctstate INVALID -j LOG --log-prefix "iptables: DROP INVALID " --log-level 7
 $IPTABLES -A INPUT -m conntrack --ctstate INVALID -j DROP
 $IPTABLES -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 #IPv6
 #Allow establish connections and related
-$IP6TABLES -A INPUT -m conntrack --ctstate INVALID -j LOG --log-prefix "ip6tables: DROP INVALID"
+$IP6TABLES -A INPUT -m conntrack --ctstate INVALID -j LOG --log-prefix "ip6tables: DROP INVALID"  --log-level 7
 $IP6TABLES -A INPUT -m conntrack --ctstate INVALID -j DROP
 $IP6TABLES -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 
@@ -75,8 +75,8 @@ do
 done
 
 ### default INPUT LOG rule
-$IPTABLES -A INPUT ! -i lo -j LOG --log-prefix "iptables: DROP "
-$IP6TABLES -A INPUT ! -i lo -j LOG --log-prefix "ip6tables: DROP "
+$IPTABLES -A INPUT ! -i lo -j LOG --log-prefix "iptables: DROP "  --log-level 7
+$IP6TABLES -A INPUT ! -i lo -j LOG --log-prefix "ip6tables: DROP "  --log-level 7
 
 ### make sure that loopback traffic is accepted
 #IPv4
