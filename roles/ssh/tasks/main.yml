@@ -24,3 +24,6 @@
 
 - name: start openssh-server
   service: name=ssh state=started
+
+- name: install additional apt packages
+  apt: name=libnss-myhostname state=latest
