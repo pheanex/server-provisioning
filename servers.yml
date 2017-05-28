@@ -1,21 +1,50 @@
 - hosts: webserver
-#  become: yes
   roles:
-    - apticron
-    - ssh
-    - hostname
+    - role: apticron
+      tags:
+        - "apticron"
+    - role: ssh
+      tags:
+        - "ssh"
+    - role: hostname
+      tags:
+        - "hostname"
     - role: apt
       tags:
         - "apt"
-    - ssl
-    - postfix
-    - dovecot
-    - ntp
-    - docker
-    - bind
-    - mc
-    - fail2ban
-    - users
-    - iptables
-    - debsecan
-    - send-logs
+    - role: ssl
+      tags:
+        - "ssl"
+    - role: postfix
+      tags:
+        - "postfix"
+    - role: dovecot
+      tags:
+        - "dovecot"
+    - role: ntp
+      tags:
+        - "ntp"
+    - role: docker
+      tags:
+        - "docker"
+    - role: bind
+      tags:
+        - "bind"
+    - role: mc
+      tags:
+        - "mc"
+    - role: fail2ban
+      tags:
+        - "fail2ban"
+    - role: users
+      tags:
+        - "users"
+    - role: iptables
+      tags:
+        - "iptables"
+    - role: debsecan
+      tags:
+        - "debsecan"
+    - role: send-logs
+      tags:
+        - "send-logs"

@@ -46,14 +46,17 @@
       dest: "/home/pheanex/.ssh/authorized_keys"
     - src: ".bashrc_pheanex.j2"
       dest: "/home/pheanex/.bashrc"
-    - src: "mount_vetinari_backup.sh"
-      dest: "/home/pheanex/bin/mount_vetinari_backup.sh"
-    - src: "umount_vetinari_backup.sh"
-      dest: "/home/pheanex/bin/umount_vetinari_backup.sh"
-    - src: "run_vetinari_backup.sh"
-      dest: "/home/pheanex/bin/run_vetinari_backup.sh"
+    - src: "mount_backup.sh"
+      dest: "/home/pheanex/bin/mount_backup.sh"
+    - src: "umount_backup.sh"
+      dest: "/home/pheanex/bin/umount_backup.sh"
+    - src: "run_backup.sh"
+      dest: "/home/pheanex/bin/run_backup.sh"
     - src: "vetinari.mount-options.j2"
       dest: "/home/pheanex/vetinari.mount-options"
+      mode: "0600"
+    - src: "raspberry.mount-options.j2"
+      dest: "/home/pheanex/raspberry.mount-options"
       mode: "0600"
     - src: "julian_pheanex_backup_key.j2"
       dest: "/home/pheanex/.ssh/julian_pheanex_backup_key"
@@ -67,14 +70,11 @@
       mode: "0600"
     - username: "pheanex"
       src: "raspberry_private_key.j2"
-      dest: "/home/raspberry/.ssh/raspberry_private"
+      dest: "/home/pheanex/.ssh/raspberry_private"
       mode: "0600"
 
 - name: install cron maildirbackup
-  cron: name="Backup to Vetinari" minute="0" hour="2" state=present user=pheanex job="/home/pheanex/bin/run_vetinari_backup.sh"
-
-#- name: run backup
-#  command: su -c /home/pheanex/bin/run_vetinari_backup.sh pheanex
+  cron: name="Backup to backup locations" minute="0" hour="2" state=present user=pheanex job="/home/pheanex/bin/run_backup.sh"
 
 - name: set git user name
   shell: su -c "cd; git config --global user.email {{item}}" "{{item}}"

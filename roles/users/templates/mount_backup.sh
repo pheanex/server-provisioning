@@ -2,7 +2,7 @@
 # This script mount a remote dir through sshfs and uses encfs to encrypt stuff
 # (Keep in mind that before you can use this, you need to initialize the encfs first)
 
-. /home/pheanex/vetinari.mount-options
+. "/home/pheanex/${1}.mount-options"
 
 if [[ -d "$sshfs_local_dir" ]]
 then
