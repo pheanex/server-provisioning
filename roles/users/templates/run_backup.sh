@@ -11,5 +11,5 @@ do
 	git commit -m "update from $(date)" &&
 	rsync -crl --partial "${HOME}/maildir/" "${HOME}/backup_decrypted/"
 
-	/home/pheanex/bin/umount.sh "$backup_location"
+	/home/pheanex/bin/umount_backup.sh "$backup_location"
 done
