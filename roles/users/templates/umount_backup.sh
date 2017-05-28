@@ -1,7 +1,7 @@
 #!/bin/bash
 # unmounts the sshfs and encfs
 
-. "/home/pheanex/$1"
+. "/home/pheanex/${1}.mount-options"
 
 [[ -d "$encfs_decrypted_dir" ]] && fusermount -u "$encfs_decrypted_dir"
 [[ -d "$sshfs_local_dir" ]] && fusermount -u "$sshfs_local_dir"
