@@ -1,7 +1,7 @@
 #!/bin/bash
 for backup_location in vetinari raspberry
 do
-	/home/pheanex/bin/mount_backup.sh "${backup_location}.mount-options" &&
+	/home/pheanex/bin/mount_backup.sh "$backup_location" &&
 	for directory in Bilder Dokumente Studium
 	do
 		rsync -crl --partial "${HOME}/Backup/${directory}" "${HOME}/backup_decrypted/"
