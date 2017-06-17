@@ -1,0 +1,26 @@
+---
+nextcloud_apps: {}
+nextcloud_archive_format: "zip" # zip | tar.bz2
+nextcloud_data_dir: "/var/ncdata"
+nextcloud_db_backend: "mysql" # "mysql"/"mariadb" | "pgsql"
+nextcloud_db_host: "127.0.0.1"
+nextcloud_force_strong_apache_ssl: true
+nextcloud_get_latest: true # mandatory # specify if the latest archive should be downloaded.
+nextcloud_hsts: false
+nextcloud_install_db: true
+nextcloud_install_tls: true
+nextcloud_install_websrv: true
+nextcloud_instance_name: "{{ nextcloud_trusted_domain | first }}"
+nextcloud_repository: "https://download.nextcloud.com/server" # Domain URL where to download Nextcloud.
+nextcloud_tls_cert: /etc/ssl/private/pheanex.de.crt.pem
+nextcloud_tls_cert_chain: "{{ nextcloud_tls_cert }}"
+nextcloud_tls_cert_key: /etc/ssl/private/pheanex.de.key.pem
+nextcloud_tls_cert_method: "installed" # "self-signed" | "signed" | "installed"
+nextcloud_tls_enforce: true
+nextcloud_trusted_domain: ["pheanex.de"]
+nextcloud_version_channel: "releases" # mandatory # releases | prereleases | daily
+nextcloud_webroot: "/opt/nextcloud"
+nextcloud_websrv: "apache2" # "apache2" | "nginx"
+nextcloud_websrv_group: "www-data"
+nextcloud_websrv_template: "templates/{{nextcloud_websrv}}_nc.j2"
+nextcloud_websrv_user: "www-data"

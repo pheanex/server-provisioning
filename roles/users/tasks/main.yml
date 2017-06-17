@@ -1,16 +1,13 @@
 ---
-- name: include vault vars
-  include_vars: vault_vars.yml
-
 - name: install users
   user: name={{item.name}} state=present shell=/bin/bash createhome=yes password={{item.password}}
   with_items:
     - name: pheanex
-      password: "{{pheanex_pw}}"
+      password: "{{user_pheanex_pw}}"
     - name: root
-      password: "{{root_pw}}"
+      password: "{{user_root_pw}}"
     - name: raspberry
-      password: "{{raspberry_pw}}"
+      password: "{{user_raspberry_pw}}"
 
 - name: known_hosts fingerprints
   lineinfile: dest="/home/pheanex/.ssh/known_hosts" state=present create=yes line="{{vetinari_ssh_fingerprint}}"
@@ -75,6 +72,9 @@
 
 - name: install cron maildirbackup
   cron: name="Backup to backup locations" minute="0" hour="2" state=present user=pheanex job="/home/pheanex/bin/run_backup.sh"
+
+- name: install git
+  apt: name=git
 
 - name: set git user name
   shell: su -c "cd; git config --global user.email {{item}}" "{{item}}"
