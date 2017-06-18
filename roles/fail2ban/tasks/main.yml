@@ -7,10 +7,10 @@
   with_items:
     - src: fail2ban.conf
       dest: fail2ban.conf
-    - src: jail.conf
-      dest: jail.conf
     - src: postfix.conf
       dest: filter.d/postfix.conf
+    - src: jaild.conf
+      dest: jail.d/jail.conf
   notify:
     - restart fail2ban
 
