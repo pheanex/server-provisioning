@@ -1,6 +1,4 @@
 ---
-- include_vars: vars/certs_keys.yml
-
 - name: install ssl-cert package
   apt: name="ssl-cert" state=latest update_cache=yes
 

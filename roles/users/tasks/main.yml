@@ -1,16 +1,14 @@
 ---
-- name: include vault vars
-  include_vars: vault_vars.yml
 
 - name: install users
   user: name={{item.name}} state=present shell=/bin/bash createhome=yes password={{item.password}}
   with_items:
     - name: pheanex
-      password: "{{pheanex_pw}}"
+      password: "{{user_pheanex_pw}}"
     - name: root
-      password: "{{root_pw}}"
+      password: "{{user_root_pw}}"
     - name: raspberry
-      password: "{{raspberry_pw}}"
+      password: "{{user_raspberry_pw}}"
 
 - name: known_hosts fingerprints
   lineinfile: dest="/home/pheanex/.ssh/known_hosts" state=present create=yes line="{{vetinari_ssh_fingerprint}}"
