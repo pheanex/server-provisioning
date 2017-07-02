@@ -83,3 +83,6 @@ $IP6TABLES -A INPUT ! -i lo -j LOG --log-prefix "ip6tables: DROP "  --log-level 
 $IPTABLES -A INPUT -i lo -j ACCEPT
 #IPv6
 $IP6TABLES -A INPUT -i lo -j ACCEPT
+
+echo "Resloading fail2ban to get rules into iptables"
+systemctl reload fail2ban.service
