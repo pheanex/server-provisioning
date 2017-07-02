@@ -74,6 +74,9 @@
 - name: install cron maildirbackup
   cron: name="Backup to backup locations" minute="0" hour="2" state=present user=pheanex job="/home/pheanex/bin/run_backup.sh"
 
+- name: install git
+  apt: name=git
+
 - name: set git user name
   shell: su -c "cd; git config --global user.email {{item}}" "{{item}}"
   with_items:
