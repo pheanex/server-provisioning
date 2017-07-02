@@ -102,15 +102,3 @@ if ! shopt -oq posix; then
 fi
 
 export PS1='\[\033[31m\]\u@\h:\w\$\[\033[0m\] '
-
-# Shortcut to quickly share an ssh session in a docker container
-sshtmux(){
-        # Allow port in firewall
-        iptables -A INPUT -i eth0 -p tcp --dport 1 -m conntrack --ctstate NEW -j ACCEPT
-
-        # Start docker container
-        docker run -it --rm -p 1:22 ssh-tmux
-
-        # Disable firewall
-        iptables -D INPUT -i eth0 -p tcp --dport 1 -m conntrack --ctstate NEW -j ACCEPT
-}
