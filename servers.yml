@@ -24,9 +24,6 @@
     - role: ntp
       tags:
         - "ntp"
-    - role: docker
-      tags:
-        - "docker"
     - role: bind
       tags:
         - "bind"
