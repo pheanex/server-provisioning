@@ -1,6 +1,6 @@
 ---
 - name: copy iptables script
-  template: src=iptables.sh dest=/root/iptables.sh owner=root group=root mode="740"
+  template: src=iptables dest=/root/iptables.sh owner=root group=root mode="740"
   notify:
     - run iptables script
     - restart docker

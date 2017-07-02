@@ -1,6 +1,6 @@
 ---
 - name: run iptables script
-  command: /root/iptables.sh
+  command: /root/iptables
 
 - name: restart docker
   service: name=docker state=restarted
