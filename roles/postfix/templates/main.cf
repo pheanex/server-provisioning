@@ -2,13 +2,13 @@
 
 # The text that follows the 220 status code in the SMTP greeting banner.
 # Some people like to see the mail version advertised.
-# By default, Postfix shows no version. 
+# By default, Postfix shows no version.
 smtpd_banner = {{hostname}}.manna.uno
 mydomain = manna.uno
 
 # Whether or not to use the local biff service.
 # This service sends "new mail" notifications to users
-# who have requested new mail notification with the UNIX command "biff y". 
+# who have requested new mail notification with the UNIX command "biff y".
 biff = no
 
 # appending .domain is the MUA's job.
@@ -36,7 +36,7 @@ smtpd_tls_auth_only = yes
 # The alias databases that are used for local(8) delivery.
 # See aliases(5) for syntax details. Specify zero or more "type:name" lookup tables,
 # separated by whitespace or comma. Tables will be searched in
-# the specified order until a match is found. Note: these lookups are recursive. 
+# the specified order until a match is found. Note: these lookups are recursive.
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
 
@@ -60,7 +60,7 @@ mydestination = localhost, localhost.$mydomain
 mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
 
 # Optional external command that the local(8) delivery agent should use for mailbox delivery.
-# The command is run with the user ID and the primary group ID privileges of the recipient. 
+# The command is run with the user ID and the primary group ID privileges of the recipient.
 mailbox_command = procmail -a "$EXTENSION"
 
 # The maximal size of any local(8) individual mailbox or maildir file, or zero (no limit)
@@ -74,8 +74,8 @@ inet_interfaces = all
 
 # An optional numerical network address that the Postfix SMTP client
 # should bind to when making an IPv4 connection
-smtp_bind_address = 37.120.160.218
-smtp_bind_address6 = 2a03:4000:0006:3150:0000:0000:0000:0001
+smtp_bind_address = {{ansible_facts.ansible_default_ipv4.address}}
+smtp_bind_address6 = {{ansible_facts.ansible_default_ipv6.address}}
 
 # Limit DOS
 default_process_limit = 100
@@ -89,7 +89,7 @@ smtpd_recipient_limit = 100
 # Wait until the RCPT TO command before evaluating $smtpd_client_restrictions,
 # $smtpd_helo_restrictions and $smtpd_sender_restrictions,
 # or wait until the ETRN command before evaluating
-# $smtpd_client_restrictions and $smtpd_helo_restrictions. 
+# $smtpd_client_restrictions and $smtpd_helo_restrictions.
 smtpd_delay_reject = yes
 
 # Require that a remote SMTP client introduces itself with the HELO or EHLO command
