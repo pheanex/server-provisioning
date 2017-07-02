@@ -7,7 +7,4 @@
     - restart fail2ban
 
 - name: copy firewall script to network interaces
-  template: src={{item}} dest=/etc/network/if-up.d/{{item}} owner=root group=root mode="755"
-  with_items:
-    - iptables
-    - fail2ban
+  template: src=iptables dest=/etc/network/if-up.d/iptables owner=root group=root mode="755"
