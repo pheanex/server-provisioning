@@ -1,6 +1,4 @@
 - hosts: webserver
-  tasks:
-    - setup:
   roles:
     - role: apticron
       tags:

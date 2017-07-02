@@ -74,8 +74,8 @@ inet_interfaces = all
 
 # An optional numerical network address that the Postfix SMTP client
 # should bind to when making an IPv4 connection
-smtp_bind_address = {{ansible_facts.ansible_default_ipv4.address}}
-smtp_bind_address6 = {{ansible_facts.ansible_default_ipv6.address}}
+smtp_bind_address = {{ansible_default_ipv4.address}}
+smtp_bind_address6 = {{ansible_default_ipv6.address}}
 
 # Limit DOS
 default_process_limit = 100
