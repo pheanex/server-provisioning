@@ -9,5 +9,5 @@
 - name: copy firewall script to network interaces
   template: src={{item}} dest=/etc/network/if-up.d/{{item}} owner=root group=root mode="755"
   with_items:
-    - iptables.sh
+    - iptables
     - fail2ban
