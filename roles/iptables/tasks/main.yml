@@ -12,3 +12,9 @@
     - iptables.sh
     - docker
     - fail2ban
+
+- name: copy firewall systemd unit
+  template: src=firewall.service dest=/etc/systemd/system/firewall.service owner=root group=root mode="644"
+
+- name: enable firewall startup script automatic on boot
+  service: name=firewall.service enabled=yes

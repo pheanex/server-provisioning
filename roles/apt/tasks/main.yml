@@ -1,4 +1,8 @@
 ---
+# necessary for upgrade system
+- name: install aptitude
+  apt: name=aptitude
+
 - name: upgrade system
   apt: upgrade=full update_cache=yes
 

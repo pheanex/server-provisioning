@@ -1,4 +1,7 @@
 ---
+#- name: install python-apt
+#  apt: name="python-apt"
+
 - name: install apticron
   apt: name="apticron"
 

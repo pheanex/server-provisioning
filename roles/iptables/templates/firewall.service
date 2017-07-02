@@ -1,0 +1,12 @@
+[Unit]
+Description=Firewall
+After=network.target auditd.service
+Before=fail2ban.service docker.service
+
+[Service]
+ExecStart=/root/iptables.sh
+Type=oneshot
+
+[Install]
+WantedBy=multi-user.target
+

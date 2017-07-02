@@ -3,7 +3,7 @@
 
 IPTABLES="/sbin/iptables"
 IP6TABLES="/sbin/ip6tables"
-export INT_INTF="eth0"
+export INT_INTF="ens3"
 #export VPN_INTF="tun0"
 export SSH_TCP_PORT="22"
 #export MINECRAFT_TCP_PORT="25555"
