@@ -14,3 +14,11 @@
 
 - name: start Fail2ban
   service: name=fail2ban state=started
+
+- name: install custom filters
+  template: src={{item.src}} dest=/etc/fail2ban/filter.d/{{item.dest}} owner=root group=root mode=644
+  with_items:
+    - src: postfix.conf
+      dest: postfix.local
+  notify:
+    - restart fail2ban
