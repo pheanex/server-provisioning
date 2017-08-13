@@ -1,4 +1,5 @@
 ---
+
 - name: install users
   user: name={{item.name}} state=present shell=/bin/bash createhome=yes password={{item.password}}
   with_items:

@@ -1,14 +1,10 @@
 ---
 - name: copy iptables script
-  template: src=iptables.sh dest=/root/iptables.sh owner=root group=root mode="740"
+  template: src=iptables dest=/root/iptables.sh owner=root group=root mode="740"
   notify:
     - run iptables script
     - restart docker
     - restart fail2ban
 
 - name: copy firewall script to network interaces
-  template: src={{item}} dest=/etc/network/if-up.d/{{item}} owner=root group=root mode="755"
-  with_items:
-    - iptables.sh
-    - docker
-    - fail2ban
+  template: src=iptables dest=/etc/network/if-up.d/iptables owner=root group=root mode="755"

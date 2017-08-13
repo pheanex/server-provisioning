@@ -2,4 +2,5 @@ Was zu tun ist um einen neuen Server zu installieren:
 * Debian stable
 * Festplattenverschlpsselung inclusive LVM
 * ipv6 in /etc/network/interaces setzen
+* check networkinterface name (eth0) and update in firewall script
 * Ansible ausrollen

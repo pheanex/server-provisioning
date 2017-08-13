@@ -1,2 +1,2 @@
 #!/bin/bash
-journalctl --since yesterday -p4 | tail -n+2 | awk '{for(i=5;i<=NF;i++){if(i==5 && $i ~/^sshd\[/){printf "sshd "}else if(i==NF){print $i}else{printf "%s ",$i}}}' | sort | uniq -c | sort -nr | column | mail -s "Rodin logs from $(date +"%d.%m.%Y")" root@pheanex.de
+journalctl --since yesterday -p5| tail -n+2 | awk '{for(i=5;i<=NF;i++){if(i==5 && $i ~/^sshd\[/){printf "sshd "}else if(i==5 && $i ~/^CRON\[/){printf "CRON "}else if(i==5 && $i ~/^postfix/){printf "postfix "}else if(i==5 && $i ~/^named\[/){printf "named "}else if(i==NF){print $i}else{printf "%s ",$i}}}' | sort | uniq -c | sort -nr | column | mail -s "Rodin logs from $(date +"%d.%m.%Y")" root@pheanex.de
