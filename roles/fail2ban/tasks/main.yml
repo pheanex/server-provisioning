@@ -22,3 +22,8 @@
       dest: postfix.local
   notify:
     - restart fail2ban
+
+- name: enable jails
+  template: src=user-enabled.conf dest=/etc/fail2ban/jail.d/user-enabled.conf owner=root group=root mode=644
+  notify:
+    - restart fail2ban
