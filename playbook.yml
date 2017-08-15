@@ -1,4 +1,5 @@
 - hosts: webserver
+  become: true
   roles:
     - role: apticron
       tags:
@@ -45,3 +46,6 @@
     - role: send-logs
       tags:
         - "send-logs"
+    - role: nextcloud
+      tags:
+        - "nextcloud"
