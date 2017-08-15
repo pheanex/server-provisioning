@@ -7,8 +7,8 @@
   with_items:
     - src: fail2ban.conf
       dest: fail2ban.d/fail2ban.conf
-    - src: jail.conf
-      dest: jail.d/jail.conf
+    - src: jaild.conf
+      dest: jail.d/jaild.conf
   notify:
     - restart fail2ban
 
@@ -20,10 +20,5 @@
   with_items:
     - src: postfix.conf
       dest: postfix.local
-  notify:
-    - restart fail2ban
-
-- name: enable jails
-  template: src=user-enabled.conf dest=/etc/fail2ban/jail.d/user-enabled.conf owner=root group=root mode=644
   notify:
     - restart fail2ban
