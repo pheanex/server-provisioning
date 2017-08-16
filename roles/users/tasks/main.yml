@@ -72,7 +72,7 @@
       mode: "0600"
 
 - name: install cron maildirbackup
-  cron: name="Backup to backup locations" minute="0" hour="2" state=present user=pheanex job="/home/pheanex/bin/run_backup.sh"
+  cron: name="Backup to backup locations" minute="0" hour="2" state=present user=pheanex job="#/home/pheanex/bin/run_backup.sh"
 
 - name: install git
   apt: name=git
