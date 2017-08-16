@@ -1,6 +1,9 @@
 - hosts: webserver
   become: true
   roles:
+    - role: apache2
+      tags:
+        - "apache2"
     - role: apticron
       tags:
         - "apticron"
