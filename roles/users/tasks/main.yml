@@ -10,6 +10,9 @@
     - name: raspberry
       password: "{{user_raspberry_pw}}"
 
+- name: add pheanex to www-data group for nextcloud
+  user: name=pheanex groups="www-data"
+
 - name: known_hosts fingerprints
   lineinfile: dest="/home/pheanex/.ssh/known_hosts" state=present create=yes line="{{vetinari_ssh_fingerprint}}"
 

@@ -1,7 +1,7 @@
 ---
 nextcloud_apps: {}
 nextcloud_archive_format: "zip" # zip | tar.bz2
-nextcloud_data_dir: "/home/ncdata"
+nextcloud_data_dir: "/home/nextcloud/ncdata"
 nextcloud_db_backend: "mysql" # "mysql"/"mariadb" | "pgsql"
 nextcloud_db_host: "127.0.0.1"
 nextcloud_force_strong_apache_ssl: true
