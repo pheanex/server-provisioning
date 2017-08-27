@@ -8,9 +8,9 @@ mysqldump --single-transaction -u {{nextcloud_db_admin}} -p{{nextcloud_db_pwd}} 
 for location in raspberry vetinari
 do
 	/home/pheanex/bin/mount_backup.sh "$location" || break
-	cp -uv "$db_dump_file" "$backup_dir"nextcloud-db-dump.sql_new && mv -v "$backup_dir"nextcloud-db-dump.sql_new "$backup_dir"nextcloud-db-dump.sql
-	cp -Ruv /home/nextcloud/ncdata/ "$backup_dir"
-	cp -Ruv /home/pheanex/maildir/ "$backup_dir"
+	cp -auv "$db_dump_file" "$backup_dir"nextcloud-db-dump.sql_new && mv -v "$backup_dir"nextcloud-db-dump.sql_new "$backup_dir"nextcloud-db-dump.sql
+	cp -aRuv /home/nextcloud/ncdata/ "$backup_dir"
+	cp -aRuv /home/pheanex/maildir/ "$backup_dir"
 	/home/pheanex/bin/umount_backup.sh "$location" || exit 1
 done
 
