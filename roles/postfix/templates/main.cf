@@ -132,3 +132,5 @@ smtpd_recipient_restrictions =
   permit_auth_destination
   reject_unauth_destination
   permit
+myorigin = /etc/mailname
+relayhost =
