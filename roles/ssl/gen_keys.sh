@@ -4,7 +4,7 @@
 vars_file="vars/certs_keys.yml"
 >| "$vars_file"
 
-for domain in "manna.koeln" "manna.uno" "pheanex.de"
+for domain in "manna.uno" "pheanex.de"
 do
 	# Generate Keys and certs
 	openssl req -x509 -nodes -new -keyout "${domain}.key.pem" -out "${domain}.crt.pem" -config "${domain}.openssl.cnf" -days 730
@@ -38,13 +38,13 @@ ansible-vault encrypt --vault-password-file ~/.ansible-vault-pw "$vars_file"
 # Remind user to update TLSA records (DANE) in bind zone-files
 echo
 echo "Update the hases in the bind zone-files" >&2
-for domain in "manna.koeln" "manna.uno" "pheanex.de"
+for domain in "manna.uno" "pheanex.de"
 do
 	echo "In the ${domain}-zone: $(cat "${domain}.crt.hash")"
 done
 
 # Cleanup hashes
-for domain in "manna.koeln" "manna.uno" "pheanex.de"
+for domain in "manna.uno" "pheanex.de"
 do
 	rm "${domain}.crt.hash"
 done

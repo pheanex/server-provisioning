@@ -10,8 +10,6 @@
   with_items:
     - name: manna.uno.crt.pem
     - name: manna.uno.key.pem
-    - name: manna.koeln.crt.pem
-    - name: manna.koeln.key.pem
     - name: pheanex.de.crt.pem
     - name: pheanex.de.key.pem
     - name: dhparams2048.pem

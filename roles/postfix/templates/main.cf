@@ -43,7 +43,7 @@ alias_database = hash:/etc/aliases
 # The internet hostname of this mail system
 myhostname = {{hostname}}.manna.uno
 
-virtual_alias_domains = pheanex.de {{hostname}}.pheanex.de mail.pheanex.de manna.koeln {{hostname}}.manna.koeln mail.manna.koeln konstantin.manna.koeln
+virtual_alias_domains = pheanex.de {{hostname}}.pheanex.de mail.pheanex.de
 virtual_mailbox_domains = manna.uno {{hostname}}.manna.uno mail.manna.uno
 virtual_uid_maps = static:1000
 virtual_gid_maps = static:1000
