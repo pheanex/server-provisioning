@@ -5,3 +5,4 @@ Was zu tun ist um einen neuen Server zu installieren:
 * check networkinterface name (eth0) and update in firewall script
 * Ansible ausrollen
 * ggfs certbot manuel ausfuehren
+* optional: manually add manna.uno vhost for apache

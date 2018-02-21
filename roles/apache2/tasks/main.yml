@@ -6,7 +6,10 @@
   apache2_module: name=ssl state=present
 
 - name: set default page + redirect http to https
-  template: src="pheanex.de-http-https-redirect.conf" dest="/etc/apache2/sites-available/pheanex.de-http-https-redirect.conf"
+  template: src="{{item}}-http-https-redirect.conf" dest="/etc/apache2/sites-available/{{item}}-http-https-redirect.conf"
+  with_items:
+    - "pheanex.de"
+    - "manna.uno"
   notify: restart_apache2
 
 - name: remove default page
@@ -15,4 +18,3 @@
 
 - name: install eltsencrypt certbot package
   apt: name=python-certbot-apache state=latest
-
