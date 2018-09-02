@@ -118,6 +118,7 @@ smtpd_helo_restrictions =
 # Filter on MAIL FROM
 smtpd_sender_restrictions =
   permit_mynetworks
+  check_sender_access hash:/etc/postfix/sender_access
   reject_non_fqdn_sender
   reject_unknown_sender_domain
   permit

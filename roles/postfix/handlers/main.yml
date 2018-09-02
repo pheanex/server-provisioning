@@ -7,3 +7,6 @@
 
 - name: update virtual_mailbox_recipients postmap
   shell: cd /etc/postfix; postmap hash:virtual_mailbox_recipients
+
+- name: update sender_access postmap
+  shell: cd /etc/postfix; postmap hash:sender_access

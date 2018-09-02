@@ -11,10 +11,12 @@
     - src: master.cf
     - src: virtual_mailbox_aliases
     - src: virtual_mailbox_recipients
+    - src: sender_access
   notify:
     - restart postfix
     - update virtual_mailbox_aliases postmap
     - update virtual_mailbox_recipients postmap
+    - update sender_access postmap
 
 - name: start Postfix
   service: name=postfix state=started
